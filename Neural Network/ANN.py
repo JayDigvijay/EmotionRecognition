@@ -178,23 +178,24 @@ def back_propagation(train, test, l_rate, n_epoch, n_hidden):
 		predictions.append(prediction)
 	return(predictions)
 
-# Test Backprop on Seeds dataset
-seed(1)
-# load and prepare data
-filename = 'Emotion_Action_Units.csv'
-dataset = load_csv(filename)
-for i in range(len(dataset[0])-1):
-	str_column_to_float(dataset, i)
-# convert class column to integers
-str_column_to_int(dataset, len(dataset[0])-1)
-# normalize input variables
-minmax = dataset_minmax(dataset)
-normalize_dataset(dataset, minmax)
-# evaluate algorithm
-n_folds = 3
-l_rate = 0.3
-n_epoch = 200
-n_hidden = 5
-scores = evaluate_algorithm(dataset, back_propagation, n_folds, l_rate, n_epoch, n_hidden)
-print('Scores: %s' % scores)
-print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
+if __name__ == "__main__":
+    # Test Backprop on Seeds dataset
+    seed(1)
+    # load and prepare data
+    filename = 'Selected_Features.csv'
+    dataset = load_csv(filename)
+    for i in range(len(dataset[0])-1):
+    	str_column_to_float(dataset, i)
+    # convert class column to integers
+    str_column_to_int(dataset, len(dataset[0])-1)
+    # normalize input variables
+    minmax = dataset_minmax(dataset)
+    normalize_dataset(dataset, minmax)
+    # evaluate algorithm
+    n_folds = 3
+    l_rate = 0.3
+    n_epoch = 200
+    n_hidden = 5
+    scores = evaluate_algorithm(dataset, back_propagation, n_folds, l_rate, n_epoch, n_hidden)
+    print('Scores: %s' % scores)
+    print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
