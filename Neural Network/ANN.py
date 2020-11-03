@@ -1,4 +1,5 @@
 # Backprop on the Seeds Dataset
+import pickle
 from random import seed
 from random import randrange
 from random import random
@@ -168,15 +169,18 @@ def predict(network, row):
 
 # Backpropagation Algorithm With Stochastic Gradient Descent
 def back_propagation(train, test, l_rate, n_epoch, n_hidden):
-	n_inputs = len(train[0]) - 1
-	n_outputs = len(set([row[-1] for row in train]))
-	network = initialize_network(n_inputs, n_hidden, n_outputs)
-	train_network(network, train, l_rate, n_epoch, n_outputs)
-	predictions = list()
-	for row in test:
-		prediction = predict(network, row)
-		predictions.append(prediction)
-	return(predictions)
+    n_inputs = len(train[0]) - 1
+    n_outputs = len(set([row[-1] for row in train]))
+    network = initialize_network(n_inputs, n_hidden, n_outputs)
+    train_network(network, train, l_rate, n_epoch, n_outputs)
+    pickfile = open('NN_Model.pickle', 'wb')
+    pickle.dump(network, pickfile, protocol=pickle.HIGHEST_PROTOCOL)
+    pickfile.close()
+    predictions = list()
+    for row in test:
+        prediction = predict(network, row)
+        predictions.append(prediction)
+    return(predictions)
 
 if __name__ == "__main__":
     # Test Backprop on Seeds dataset
