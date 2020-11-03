@@ -37,4 +37,4 @@ def Fitness(gene):
     print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
     return ((sum(scores)/float(len(scores))))
 if __name__ == '__main__':
-    Fitness('111110')
+    Fitness('101111')
